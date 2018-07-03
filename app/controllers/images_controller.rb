@@ -9,6 +9,11 @@ class ImagesController < ApplicationController
     end
   end
 
+  def show
+    image = Image.find(params[:id])
+    render jsonapi: image
+  end
+
   private
 
   def parsed_params
