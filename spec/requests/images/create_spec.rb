@@ -13,6 +13,7 @@ RSpec.describe "POST /images" do
         expect(response.status).to eq(200)
         json_response = JSON.parse(response.body)
         expect(json_response["data"]).to be_an_instance_of(Array)
+        expect(json_response["data"].first.keys).to eq(["id", "type", "attributes"])
         expect(json_response["data"].first["attributes"]["urls"].count).to eq(1)
       end
     end
