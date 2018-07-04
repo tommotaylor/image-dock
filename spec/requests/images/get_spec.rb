@@ -1,6 +1,6 @@
 RSpec.describe "GET /images/:id" do
   context "when image exists" do
-    let!(:image) { create(:image) }
+    let!(:image) { create(:image, :jpg) }
     it "should return the url of the image" do
       get image_path(image)
 
