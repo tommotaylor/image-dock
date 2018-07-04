@@ -5,6 +5,7 @@ RSpec.describe "GET /images/:id" do
       get image_path(image)
 
       expect(response.status).to eq(200)
+      expect(response).to be_api_json_response
       json_response = JSON.parse(response.body)
       expect(json_response["data"].keys).to eq(["id", "type", "attributes"])
       expect(json_response["data"]["id"]).to eq(image.id.to_s)
@@ -19,6 +20,7 @@ RSpec.describe "GET /images/:id" do
       get image_path(1)
 
       expect(response.status).to eq(404)
+      expect(response).to be_api_json_response
       json_response = JSON.parse(response.body)
       expect(json_response["error"]).to eq("Image not found")
     end

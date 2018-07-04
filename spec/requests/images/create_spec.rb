@@ -11,6 +11,7 @@ RSpec.describe "POST /images" do
 
         expect(Image.first.uploads.count).to eq(1)
         expect(response.status).to eq(200)
+        expect(response).to be_api_json_response
         json_response = JSON.parse(response.body)
         expect(json_response["data"]).to be_an_instance_of(Array)
         expect(json_response["data"].first.keys).to eq(["id", "type", "attributes"])
@@ -28,6 +29,7 @@ RSpec.describe "POST /images" do
 
         expect(Image.all.map {|i| i.uploads.count }).to eq([1, 1])
         expect(response.status).to eq(200)
+        expect(response).to be_api_json_response
         json_response = JSON.parse(response.body)
         expect(json_response["data"]).to be_an_instance_of(Array)
         expect(json_response["data"].count).to eq(2)
@@ -44,6 +46,7 @@ RSpec.describe "POST /images" do
       end.to change { Image.count }.by 0
 
       expect(response.status).to eq(400)
+      expect(response).to be_api_json_response
       json_response = JSON.parse(response.body)
       expect(json_response["error"]).to eq("Unsupported request type, please use 'multipart/form-data'")
     end
